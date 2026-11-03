@@ -143,7 +143,7 @@ const LocationSelector = () => {
             className="mb-8"
           >
             <img 
-              src="/shawarma-alley-logo.png" 
+              src={`${import.meta.env.BASE_URL}shawarma-alley-logo.png`}
               alt="Shawarma Alley" 
               className="h-24 md:h-32 mx-auto mb-8"
             />

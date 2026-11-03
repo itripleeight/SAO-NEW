@@ -394,6 +394,8 @@ const BuildYourShawarma = () => {
                   stores={locations}
                   onStoreChange={chooseStore}
                   checkout={checkout}
+                  // Prices only load when our Square checkout is reachable.
+                  checkoutReady={menu !== null}
                   onOrder={placeOrder}
                   fallbackUrl={orderUrlFor(currentLocation)}
                   onEdit={editWrap}

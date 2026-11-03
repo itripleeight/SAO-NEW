@@ -8,6 +8,19 @@
       "port": 5173
     },
     {
+      "name": "share-preview",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["vite", "preview", "--config", "vite.share.config.js", "--port", "4173", "--strictPort"],
+      "port": 4173
+    },
+    {
+      "name": "pages-preview",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["vite", "preview", "--outDir", "pages-dist", "--base", "/shawarma-alley-preview/", "--port", "4174", "--strictPort"],
+      "port": 4174,
+      "url": "http://localhost:4174"
+    },
+    {
       "name": "functions",
       "runtimeExecutable": "npm",
       "runtimeArgs": ["run", "functions:dev"],

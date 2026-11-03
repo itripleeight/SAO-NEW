@@ -132,7 +132,7 @@ const WrappedShawarma = ({ protein, veggies, sauceColors, reduceMotion }) => {
             <path d="M38,-56 H50 L26,56 H14 Z" fill="#FFC107" />
             <path d="M33,-56 L9,56" stroke="#4E342E" strokeWidth="2.2" />
             <path d="M54,-56 L30,56" stroke="#CFC3B0" strokeWidth="1.5" />
-            <image href="/shawarma-alley-logo.png" x="-110" y="-47" width="54" height="47" />
+            <image href={`${import.meta.env.BASE_URL}shawarma-alley-logo.png`} x="-110" y="-47" width="54" height="47" />
             <text
               x="-83"
               y="24"

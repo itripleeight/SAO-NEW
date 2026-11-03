@@ -6,6 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "build:share": "vite build --config vite.share.config.js",
+    "deploy:pages": "node scripts/deploy-pages.mjs",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "functions:dev": "firebase emulators:start --only functions",

@@ -4,8 +4,8 @@ import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { FaArrowRight } from 'react-icons/fa';
 
-const HERO_COVER_URL = encodeURI('/Fb Cover 014 copy.jpg.jpeg');
-const CTA_BACKGROUND_URL = encodeURI('/readytotry.jpg');
+const HERO_COVER_URL = encodeURI(`${import.meta.env.BASE_URL}Fb Cover 014 copy.jpg.jpeg`);
+const CTA_BACKGROUND_URL = encodeURI(`${import.meta.env.BASE_URL}readytotry.jpg`);
 
 /** Match Our Story, CTA band, and footer vertical footprint */
 const BLOCK_MIN_H = 'min-h-[48rem] md:min-h-[52rem]';
@@ -112,7 +112,7 @@ const Home = () => {
             </div>
             <div className="relative">
               <img
-                src="/ecf4a782-bf63-46dc-a5fe-f136da029727.jpg"
+                src={`${import.meta.env.BASE_URL}ecf4a782-bf63-46dc-a5fe-f136da029727.jpg`}
                 alt="Shawarma Alley"
                 className="rounded-lg shadow-xl w-full h-auto object-cover"
               />

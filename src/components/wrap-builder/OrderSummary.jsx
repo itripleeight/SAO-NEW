@@ -6,6 +6,9 @@ import { SauceThumb } from './SauceArt';
 import { HOT_SAUCE_COLOR } from './ingredients';
 import { formatMoney } from './orderApi';
 
+const ORDER_BUTTON =
+  'flex flex-1 items-center justify-center gap-2 rounded-full bg-primary-500 px-6 py-3 font-semibold text-neutral-900 shadow-lg shadow-primary-500/30 transition-colors duration-300 hover:bg-primary-600 disabled:cursor-wait disabled:opacity-80';
+
 const Chip = ({ thumb, children }) => (
   <li className="flex items-center gap-2 rounded-full bg-neutral-100 py-1 pl-1 pr-3 text-sm font-medium text-neutral-800">
     <span className="flex h-7 w-7 items-center justify-center rounded-full bg-white">{thumb}</span>
@@ -13,7 +16,8 @@ const Chip = ({ thumb, children }) => (
   </li>
 );
 
-// The finished wrap, where the store is picked and checkout starts.
+// The finished wrap, where the store is picked and checkout starts. Without our Square checkout
+// (`checkoutReady` false), Order Online opens the wrap on the Square Online menu instead.
 const OrderSummary = ({
   cardRef,
   protein,
@@ -28,6 +32,7 @@ const OrderSummary = ({
   stores,
   onStoreChange,
   checkout,
+  checkoutReady,
   onOrder,
   fallbackUrl,
   onEdit,
@@ -110,22 +115,23 @@ const OrderSummary = ({
       )}
 
       <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-        <button
-          type="button"
-          onClick={onOrder}
-          disabled={pending}
-          className="flex flex-1 items-center justify-center gap-2 rounded-full bg-primary-500 px-6 py-3 font-semibold text-neutral-900 shadow-lg shadow-primary-500/30 transition-colors duration-300 hover:bg-primary-600 disabled:cursor-wait disabled:opacity-80"
-        >
-          {pending ? (
-            <>
-              <FaSpinner className="animate-spin" /> Opening checkout…
-            </>
-          ) : (
-            <>
-              Order Online <FaArrowRight size={13} />
-            </>
-          )}
-        </button>
+        {checkoutReady ? (
+          <button type="button" onClick={onOrder} disabled={pending} className={ORDER_BUTTON}>
+            {pending ? (
+              <>
+                <FaSpinner className="animate-spin" /> Opening checkout…
+              </>
+            ) : (
+              <>
+                Order Online <FaArrowRight size={13} />
+              </>
+            )}
+          </button>
+        ) : (
+          <a href={fallbackUrl} className={ORDER_BUTTON}>
+            Order Online <FaArrowRight size={13} />
+          </a>
+        )}
         <button
           type="button"
           onClick={onEdit}
@@ -136,7 +142,9 @@ const OrderSummary = ({
         </button>
       </div>
       <p className="mt-3 text-xs text-neutral-500">
-        You’ll pay on Square’s secure checkout, then pick it up at our {store.name} store.
+        {checkoutReady
+          ? `You’ll pay on Square’s secure checkout, then pick it up at our ${store.name} store.`
+          : `Order Online opens the Shawarma Wrap at our ${store.name} store. Choose the same options there to check out.`}
       </p>
 
       <button
